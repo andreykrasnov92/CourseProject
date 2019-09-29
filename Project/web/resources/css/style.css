@@ -1,0 +1,124 @@
+/* 
+    Document   : style
+    Created on : 09.04.2013, 21:32:31
+    Author     : 1
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+a:hover {
+    color: red;
+}
+
+body {
+    background-image: url("../img/background.png");
+    background-size: cover;
+    font-family: Arial, Helvetica, sans-serif, fantasy;
+    font-size: 100%;
+}
+
+h1.labels, .login_title {
+    background-color: lightblue;
+    margin-left: 32%;
+    margin-right: 32%;
+    margin-top: 1%;
+}
+
+h1, h2, h3 {
+    text-align: center;
+}
+
+h3.names {
+    font-style: italic;
+}
+
+root { 
+    display: block;
+}
+
+table {
+    empty-cells: show;
+    padding: 5px;
+}
+
+.admin_tables {
+    background-color: darkorange;
+    text-align: left;
+}
+
+.entities {
+    background-color: yellowgreen;
+    text-align: left;
+}
+
+.entrance {
+    background-color: greenyellow;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+.error {
+    color: darkred;
+}
+
+.exit, #about_exit {
+    background-color: pink;
+    padding: 5px;
+}
+
+.exit, .fail, .login, #about_exit {
+    font-size: 125%;
+}
+
+.fail {
+    background-color: greenyellow;
+    margin-left: 30%;
+    margin-top: 3%;
+    padding: 10px;
+}
+
+.login {
+    background-color: yellow;
+    margin-top: 1%;
+}
+
+.login, .exit {
+    margin-left: 32%;
+    margin-right: 32%;
+}
+
+.queries {
+    background-color: greenyellow;
+    text-align: left;
+}
+
+.admin_tables, .success {
+    margin-left: 32%;
+    margin-top: 3%;
+}
+
+.user_title {
+    background-color: lightblue;
+    margin-left: 32%;
+    margin-right: 5%;
+    margin-top: 1%;
+}
+
+#about {
+    background-color: lightseagreen;
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 5%;
+    padding: 5px;
+    padding-left: 10px;
+    text-align: center;
+}
+
+#about_exit {
+    margin-left: 30%;
+    margin-right: 30%;
+}
+
+#space {
+    width: 20px;
+}

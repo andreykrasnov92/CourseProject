@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="Просмотр записи в расписании"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="Чётность недели:"/>
+                    <h:outputText value="#{timetableRecordsController.selected.timetableRecordsPK.weekParity}" title="Чётность недели"/>
+                    <h:outputText value="Номер пары:"/>
+                    <h:outputText value="#{timetableRecordsController.selected.timetableRecordsPK.pairNumber}" title="Номер пары"/>
+                    <h:outputText value="День недели:"/>
+                    <h:outputText value="#{timetableRecordsController.selected.timetableRecordsPK.weekday}" title="День недели"/>
+                    <h:outputText value="Номер аудитории:"/>
+                    <h:outputText value="#{timetableRecordsController.selected.roomNumber}" title="Номер аудитории"/>
+                    <h:outputText value="Группа:"/>
+                    <h:outputText value="#{timetableRecordsController.selected.groups.toString().substring(3)}" title="Группа"/>
+                    <h:outputText value="Дисциплина:"/>
+                    <h:outputText value="#{timetableRecordsController.selected.disciplineId.toString().substring(3)}" title="Дисциплина"/>
+                </h:panelGrid>
+                <br/>
+                <h:commandLink action="#{timetableRecordsController.destroyAndView}" value="Удалить"/>
+                <br/>
+                <br/>
+                <h:link outcome="Edit" value="Редактировать"/>
+                <br/>
+                <h:commandLink action="#{timetableRecordsController.prepareCreate}" value="Добавить запись в расписание"/>
+                <br/>
+                <h:commandLink action="#{timetableRecordsController.prepareList}" value="Вернуться к расписанию"/>
+                <br/>
+                <br/>
+                <h:link outcome="/main" value="Вернуться на главную страницу"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

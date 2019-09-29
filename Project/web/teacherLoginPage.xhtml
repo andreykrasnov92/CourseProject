@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+        <title>Вход в систему</title>
+        <h:outputStylesheet name="css/style.css"/>
+        <link rel="shortcut icon" href="resources/img/icon.png" type="image/png"/>
+    </h:head>
+    <h:body>
+        <h1 class="login_title">Вход преподавателя</h1>
+        <h:form>
+            <table class="login">
+                <tr>
+                    <td>
+                        Логин:
+                    </td>
+                    <td>
+                        <h:inputText id="tLogin" value="#{loginController.teLogin}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Пароль:
+                    </td>
+                    <td>
+                        <h:inputSecret id="tPassword" value="#{loginController.tePassword}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="entrance" colspan="3">
+                        <h:commandLink action="#{loginController.loginTeacher()}" value="Войти"/>
+                    </td>
+                </tr>
+            </table>
+            <br/>
+            <table class="exit">
+                <tr>
+                    <td>
+                        <h:commandLink action="#{loginController.logOff()}"
+                                       value="Вернуться на страницу приветствия"/>
+                    </td>
+                </tr>
+            </table>
+        </h:form>
+    </h:body>
+</html>

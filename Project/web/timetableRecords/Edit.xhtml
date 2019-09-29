@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="Редактирование записи в расписании"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="Чётность недели:" for="timetableRecordsPK_weekParity"/>
+                    <h:inputText id="timetableRecordsPK_weekParity" value="#{timetableRecordsController.selected.timetableRecordsPK.weekParity}"
+                                 title="Чётность недели"
+                                 required="true" requiredMessage="Поле должно быть заполнено"/>
+                    <h:outputLabel value="Номер пары:" for="timetableRecordsPK_pairNumber"/>
+                    <h:inputText id="timetableRecordsPK_pairNumber" value="#{timetableRecordsController.selected.timetableRecordsPK.pairNumber}"
+                                 title="Номер пары"
+                                 required="true" requiredMessage="Поле должно быть заполнено"/>
+                    <h:outputLabel value="День недели:" for="timetableRecordsPK_weekday"/>
+                    <h:inputText id="timetableRecordsPK_weekday" value="#{timetableRecordsController.selected.timetableRecordsPK.weekday}"
+                                 title="День недели"
+                                 required="true" requiredMessage="Поле должно быть заполнено"/>
+                    <h:outputLabel value="Номер аудитории:" for="roomNumber"/>
+                    <h:inputText id="roomNumber" value="#{timetableRecordsController.selected.roomNumber}"
+                                 title="Номер аудитории"/>
+                    <h:outputLabel value="Группа:" for="groups"/>
+                    <h:selectOneMenu id="groups" value="#{timetableRecordsController.selected.groups}"
+                                     title="Группа"
+                                     required="true" requiredMessage="Поле должно быть заполнено">
+                        <f:selectItems value="#{groupsController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="Дисциплина:" for="disciplineId"/>
+                    <h:selectOneMenu id="disciplineId" value="#{timetableRecordsController.selected.disciplineId}"
+                                     title="Дисциплина"
+                                     required="true" requiredMessage="Поле должно быть заполнено">
+                        <f:selectItems value="#{disciplinesController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{timetableRecordsController.update}" value="Сохранить"/>
+                <br/>
+                <br/>
+                <h:link outcome="View" value="Просмотреть данные"/>
+                <br/>
+                <h:commandLink action="#{timetableRecordsController.prepareList}"
+                               value="Вернуться к расписанию" immediate="true"/>
+                <br/>
+                <br/>
+                <h:link outcome="/main" value="Вернуться на главную страницу"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

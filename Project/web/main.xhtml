@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <h:head>
+        <c:if test="${loginController.admin}">
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        </c:if>
+        <c:if test="${not loginController.admin}">
+            <meta http-equiv="Refresh" content="5; url=#{loginController.logOff()}.xhtml"/>
+        </c:if>
+        <title>Управление системой</title>
+        <h:outputStylesheet name="css/style.css"/>
+        <script type="text/javascript" src="resources/js/script.js"/>
+        <link rel="shortcut icon" href="resources/img/icon.png" type="image/png"/>
+    </h:head>
+    <h:body>
+        <c:if test="${loginController.admin}">
+            <h:form>
+                <h1 class="user_title">Здравствуйте, администратор!</h1>
+                <h2 class="user_title">Выберите таблицу для манипулирования данными</h2>
+                <table class="admin_tables">
+                    <tr>
+                        <td>
+                            <h:link outcome="/administrator/View" value="Персональные данные администратора"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h:link outcome="/disciplines/List" value="Список дисциплин"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h:link outcome="/groups/List" value="Список групп"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h:link outcome="/students/List" value="Список студентов"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h:link outcome="/teachers/List" value="Список преподавателей"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h:link outcome="/timetableRecords/List" value="Расписание"/>
+                        </td>
+                    </tr>
+                </table>
+                <p>
+                    <h:commandLink class="exit" action="#{loginController.logOff()}" value="Выйти из системы"/>
+                </p>
+            </h:form>
+        </c:if>
+        <c:if test="${not loginController.admin}">
+            <table class="fail">
+                <tr>
+                    <td>
+                        <h:form>
+                            <p class="error">
+                                Ошибка! Неверный логин или пароль.
+                            </p>
+                            <p>
+                                Вы будете перенаправлены на страницу приветствия через <span id="timer">5</span> секунды.
+                            </p>
+                            <p>
+                                Нажмите <h:commandLink action="#{loginController.logOff()}" value="здесь"/> для немедленного перехода на страницу приветствия.
+                            </p>
+                        </h:form>
+                    </td>
+                </tr>
+            </table>
+        </c:if>
+    </h:body>
+</html>

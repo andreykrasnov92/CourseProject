@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="Расписание"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="Ни одной записи в расписании не найдено" rendered="#{timetableRecordsController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{timetableRecordsController.items.rowCount > 0}">
+                    <h:outputText value="#{timetableRecordsController.pagination.pageFirstItem + 1}..#{timetableRecordsController.pagination.pageLastItem + 1}/#{timetableRecordsController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{timetableRecordsController.previous}" value="#{bundle.Previous} #{timetableRecordsController.pagination.pageSize}" rendered="#{timetableRecordsController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{timetableRecordsController.next}" value="#{bundle.Next} #{timetableRecordsController.pagination.pageSize}" rendered="#{timetableRecordsController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{timetableRecordsController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="День недели"/>
+                            </f:facet>
+                            <h:outputText value="#{item.timetableRecordsPK.weekday}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Номер пары"/>
+                            </f:facet>
+                            <h:outputText value="#{item.timetableRecordsPK.pairNumber}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Чётность недели"/>
+                            </f:facet>
+                            <h:outputText value="#{item.timetableRecordsPK.weekParity}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Номер аудитории"/>
+                            </f:facet>
+                            <h:outputText value="#{item.roomNumber}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Группа"/>
+                            </f:facet>
+                            <h:outputText value="#{item.groups.toString().substring(3)}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Дисциплина"/>
+                            </f:facet>
+                            <h:outputText value="#{item.disciplineId.toString().substring(3)}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{timetableRecordsController.prepareView}" value="Просмотреть"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{timetableRecordsController.prepareEdit}" value="Редактировать"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{timetableRecordsController.destroy}" value="Удалить"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br/>
+                <h:commandLink action="#{timetableRecordsController.prepareCreate}" value="Добавить новую запись в расписание"/>
+                <br/>
+                <br/>
+                <h:link outcome="/main" value="Вернуться на главную страницу"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

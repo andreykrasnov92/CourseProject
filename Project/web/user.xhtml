@@ -1,0 +1,220 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <c:if test="${loginController.teacher or loginController.student}">
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        </c:if>
+        <c:if test="${not loginController.teacher and not loginController.student}">
+            <meta http-equiv="Refresh" content="5; url=#{loginController.logOff()}.xhtml"/>
+        </c:if>
+        <title>Страница пользователя</title>
+        <h:outputStylesheet name="css/style.css"/>
+        <script type="text/javascript" src="resources/js/script.js"/>
+        <link rel="shortcut icon" href="resources/img/icon.png" type="image/png"/>
+    </h:head>
+    <h:body>
+        <c:if test="${loginController.teacher or loginController.student}">
+            <h1 class="user_title">Здравствуйте, пользователь!</h1>
+            <h2 class="user_title">Выберите запрос для получения необходимых данных</h2>
+            <table class="success">
+                <tr>
+                    <td>
+                        <h:form>
+                            <table class="entities">
+                                <tr>
+                                    <td>
+                                        <h:link outcome="/disciplines/UserList" value="Список дисциплин"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h:link outcome="/groups/UserList" value="Список групп"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h:link outcome="/students/UserList" value="Список студентов"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h:link outcome="/teachers/UserList" value="Список преподавателей"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h:link outcome="/timetableRecords/UserList" value="Расписание"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h:commandLink action="#{teachersAndDisciplinesController.goForward()}"
+                                                       value="Дисциплины и преподаватели"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </h:form>
+                    </td>
+                    <td id="space">
+                    </td>
+                    <td rowspan="2">
+                        <h:form>
+                            <table class="queries">
+                                <tr>
+                                    <td>
+                                        <h:commandLink action="#{disciplinesByGroupController.goForward()}" value="Дисциплины группы"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        &nbsp;(выберите группу)&nbsp;
+                                        <h:selectOneMenu id="gNumber1"
+                                                         value="#{disciplinesByGroupController.group}"
+                                                         title="Номер группы">
+                                            <f:selectItems value="#{groupsController.itemsAvailableSelectOne}"/>
+                                        </h:selectOneMenu>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h:commandLink action="#{disciplinesByTeacherController.goForward()}" value="Дисциплины преподавателя"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        &nbsp;(выберите преподавателя)&nbsp;
+                                        <h:selectOneMenu id="tName1"
+                                                         value="#{disciplinesByTeacherController.teacher}"
+                                                         title="ФИО преподавателя">
+                                            <f:selectItems value="#{teachersController.itemsAvailableSelectOne}"/>
+                                        </h:selectOneMenu>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h:commandLink action="#{studentsByGroupController.goForward()}" value="Студенты группы"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        &nbsp;(выберите группу)&nbsp;
+                                        <h:selectOneMenu id="gNumber2"
+                                                         value="#{studentsByGroupController.group}"
+                                                         title="Номер группы">
+                                            <f:selectItems value="#{groupsController.itemsAvailableSelectOne}"/>
+                                        </h:selectOneMenu>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h:commandLink action="#{teachersByGroupController.goForward()}" value="Преподаватели группы"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        &nbsp;(выберите группу)&nbsp;
+                                        <h:selectOneMenu id="gNumber3"
+                                                         value="#{teachersByGroupController.group}"
+                                                         title="Номер группы">
+                                            <f:selectItems value="#{groupsController.itemsAvailableSelectOne}"/>
+                                        </h:selectOneMenu>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h:commandLink action="#{teachersByDisciplineController.goForward()}" value="Преподаватели дисциплины"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        &nbsp;(выберите дисциплину)&nbsp;
+                                        <h:selectOneMenu id="dName"
+                                                         value="#{teachersByDisciplineController.discipline}"
+                                                         title="Название дисциплины">
+                                            <f:selectItems value="#{disciplinesController.itemsAvailableSelectOne}"/>
+                                        </h:selectOneMenu>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h:commandLink action="#{teachersByNameController.goForward()}" value="Преподаватели по имени"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        &nbsp;(выберите преподавателя)&nbsp;
+                                        <h:selectOneMenu id="tName2"
+                                                         value="#{teachersByNameController.teacher}"
+                                                         title="ФИО преподавателя">
+                                            <f:selectItems value="#{teachersController.itemsAvailableSelectOne}"/>
+                                        </h:selectOneMenu>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h:commandLink action="#{timetableByGroupController.goForward()}" value="Расписание группы"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        &nbsp;(выберите группу)&nbsp;
+                                        <h:selectOneMenu id="gNumber4"
+                                                         value="#{timetableByGroupController.group}"
+                                                         title="Номер группы">
+                                            <f:selectItems value="#{groupsController.itemsAvailableSelectOne}"/>
+                                        </h:selectOneMenu>
+                                    </td>
+                                </tr>
+                            </table>
+                        </h:form>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                        <h:form>
+                            <table>
+                                <td>
+                                    <tr>
+                                        <br/>
+                                        <h:commandLink class="exit" action="#{loginController.logOff()}" value="Выйти из системы"/>
+                                    </tr>
+                                </td>
+                            </table>
+                        </h:form>
+                    </td>
+                </tr>
+            </table>
+        </c:if>
+        <c:if test="${not loginController.teacher and not loginController.student}">
+            <table class="fail">
+                <tr>
+                    <td>
+                        <h:form>
+                            <p class="error">
+                                Ошибка! Неверный логин или пароль.
+                            </p>
+                            <p>
+                                Вы будете перенаправлены на страницу приветствия через <span id="timer">5</span> секунды.
+                            </p>
+                            <p>
+                                Нажмите <h:commandLink action="#{loginController.logOff()}" value="здесь"/> для немедленного перехода на страницу приветствия.
+                            </p>
+                        </h:form>
+                    </td>
+                </tr>
+            </table>
+        </c:if>
+    </h:body>
+</html>
